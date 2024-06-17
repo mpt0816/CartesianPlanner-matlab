@@ -173,7 +173,7 @@ classdef Plot < handle
         end
         
         function PlotSafeCorridor(env, traj, corridor, title_string)
-            
+            global current_folder
             dp_config = GetDPPlannerConfig();
             dt = dp_config.tf / (dp_config.nfe - 1);
             t_total = dp_config.tf;
@@ -271,9 +271,13 @@ classdef Plot < handle
             zlabel('time(s)');
             title(title_string);
             axis equal;
+            
+            png_name = strcat(title_string, '.png');
+            saveas(gcf, [current_folder, '\figure\', png_name]);
         end
         
         function PlotResult(env, traj)
+            global current_folder
             
             dp_config = GetDPPlannerConfig();
             dt = dp_config.tf / (dp_config.nfe - 1);
@@ -367,6 +371,7 @@ classdef Plot < handle
             title("Planned Trajectory");
             axis equal;
 %             axis off;
+            saveas(gcf, [current_folder, '\figure\', 'Planned Trajectory.png']);
             
             figure;
             sgtitle("states/control profile");
@@ -391,6 +396,8 @@ classdef Plot < handle
             subplot(4,2,7);
             plot(traj.t, traj.jerk, 'k-', 'LineWidth', 1.0);
             xlabel('time(s)'); ylabel('jerk(m/s3)');
+            
+            saveas(gcf, [current_folder, '\figure\', 'states control profile.png']);
         end
         
         function color = GetColor(dt, total)

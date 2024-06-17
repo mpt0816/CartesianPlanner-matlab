@@ -1,6 +1,7 @@
 clc; clear all; close all;
 
 %% 添加路径
+global current_folder
 current_folder = pwd;
 addpath(genpath(current_folder));
 
