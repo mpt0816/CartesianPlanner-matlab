@@ -172,7 +172,7 @@ classdef Plot < handle
             legend('Acceleration');
         end
         
-        function PlotSafeCorridor(env, traj, corridor)
+        function PlotSafeCorridor(env, traj, corridor, title_string)
             
             dp_config = GetDPPlannerConfig();
             dt = dp_config.tf / (dp_config.nfe - 1);
@@ -269,6 +269,7 @@ classdef Plot < handle
             xlabel('x(m)');
             ylabel('y(m)');
             zlabel('time(s)');
+            title(title_string);
             axis equal;
         end
         
@@ -363,10 +364,12 @@ classdef Plot < handle
             xlabel('x(m)');
             ylabel('y(m)');
             zlabel('time(s)');
+            title("Planned Trajectory");
             axis equal;
 %             axis off;
             
             figure;
+            sgtitle("states/control profile");
             subplot(4,2,1);
             plot(traj.x, traj.y, 'k-', 'LineWidth', 1.0);
             xlabel('x(m)'); ylabel('y(m)');

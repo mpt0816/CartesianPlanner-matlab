@@ -158,9 +158,10 @@ classdef LIOCPPlanner < handle
                 [~, constraints] = obj.safe_corridor_.FormulateConstraints(guess);
                 [infeasibility, guess] = obj.SolveIteractively(weight_penalty, constraints, guess, coarse);
                 
-%                 figure;
-%                 traj_plot = obj.DataTransform(guess);
-%                 Plot.PlotSafeCorridor(obj.env_, traj_plot, constraints);
+                figure;
+                title_string = num2str(iter + 1) + "th iter safe corridor"; 
+                traj_plot = obj.DataTransform(guess);
+                Plot.PlotSafeCorridor(obj.env_, traj_plot, constraints, title_string);
                 
                 if infeasibility < obj.config_.varepsilon_tol
                     traj = obj.DataTransform(guess);
